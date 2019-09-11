@@ -40,7 +40,7 @@ def checkout(cart, coupons)
   cp = apply_coupons(cc, coupons)
   cl = apply_clearance(cp)
   
-  cl.reduce(0) {|sum, (key, value)| sum += (value[:price] * value[:count]) }
+  cl.reduce(0) {|sum, (key, value)| sum += (value[:price] * value[:count]).round(2) }
 end
 
 def consolidate_cart2(cart)
