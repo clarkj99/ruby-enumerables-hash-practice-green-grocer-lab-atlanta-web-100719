@@ -36,8 +36,11 @@ def apply_clearance(cart)
 end
 
 def checkout(cart, coupons)
-  preped_cart= apply_clearance(apply_coupons(colsolidate_cart(cart), coupons))
+  cc = consolidate_cart(cart)
+  cp = apply_coupons(cc, coupons)
+  cl = apply_clearance(cp)
   
+  cl.reduce(0) {|sum, (key, value)| sum += value[:price] * value:[:count] }
 end
 
 def consolidate_cart2(cart)
